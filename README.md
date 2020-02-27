@@ -6,17 +6,13 @@ Run native gtk3+ applications inside a container via the browser
 
 ## Instructions
 
+Build image locally
 
-`docker run --rm -p 8085:8085 chadmoon/gtk3-docker`
+`docker build -t ubuntu-gtk3 .`
+`docker run --rm -p 8085:8085 ubuntu-gtk3`
 
 Open `http://localhost:8085`
 
-
-or build image locally
-
-`docker build -t gtk3-docker .`
-`docker run --rm -p 8085:8085 gtk3-docker`
-
 ## Description
 
-This container is based on arch linux. It sets up the environment to use the BROADWAY html5 display for rendering applications. A small gtk3+ "launcher" application is used as the entrypoint. 
+This container is based on ubuntu. It sets up the environment to use the BROADWAY html5 display for rendering applications. A small gtk3+ "launcher" application is used as the entrypoint.

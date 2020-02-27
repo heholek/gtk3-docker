@@ -1,16 +1,18 @@
-FROM pritunl/archlinux:latest
-
-COPY gjs /gjs
+FROM ubuntu:19.10
 
 EXPOSE 8085
 
-RUN pacman --noconfirm -S gtk3 xfce4 midori mypaint gedit nautilus gnome-mines htop gcc pkg-config gjs vim
+RUN apt-get update
+RUN apt-get clean
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential libgtk-3-dev libcairo2-dev libglib2.0-dev xfce4 nautilus pkg-config
 #toilix
-RUN pacman --noconfirm -S arc-gtk-theme git wget yajl dub dmd terminator
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git wget libcurl4
 
-RUN pacman -S --noconfirm --needed base-devel 
+RUN wget http://downloads.dlang.org/releases/2020/dmd_2.090.1-0_amd64.deb
+RUN dpkg -i dmd_2.090.1-0_amd64.deb
 
-RUN pacman -S --noconfirm gnome gnome-extra mate mate-extra
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install gnome
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install gettext
 
 RUN git clone https://github.com/gnunn1/tilix.git; cd tilix; dub build --build=release; ./install.sh
 
